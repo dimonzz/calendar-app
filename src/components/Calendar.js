@@ -2,32 +2,33 @@ import React from 'react'
 import Day from './Day.js';
  
 class Calendar extends React.Component {
-	constructor(props) {
-		super(props);
-	}
 	render() {
-		const date = new Date();
+		const date = new Date(this.props.date);
 		date.setDate(1);
-		console.log("DATE !", date);
+		
 		const currentMonth = date.getMonth();
+		const currentYear = date.getYear();
 
-		if (date.getDay() !== 1) {
-			date.setDate(2 - date.getDay())
+		// as JS return 0 for Sunday, we need to make little hack around it 
+		let dayInWeek = date.getDay();
+		dayInWeek = dayInWeek == 0 ? 7 : dayInWeek;
+
+		if (dayInWeek !== 1) {
+			date.setDate(2 - dayInWeek)
 		}
 
 		const elements = [];
-		console.log("DATE", date);
 		let shouldBeVisible = true;
 		while (shouldBeVisible) {
 			const fromCurrentMonth = date.getMonth() == currentMonth;
-			const day = date.getDate();
-			elements.push(<Day fromCurrentMonth={fromCurrentMonth} day={day}></Day>);
+			const dayInMonth = date.getDate();
+			elements.push(<Day key={date.getMonth() + '-' + date.getDate()} fromCurrentMonth={fromCurrentMonth} day={dayInMonth}></Day>);
 
-			date.setDate(day + 1);
+			date.setDate(dayInMonth + 1);
 
 			// check if we are in next month and next day to render is Monday
 			// if yes - we don't need to add more days to calendar
-			if(date.getMonth() > currentMonth && date.getDay() == 1) {
+			if((date.getMonth() > currentMonth || date.getYear() > currentYear) && date.getDay() == 1) {
 				shouldBeVisible = false;
 			}
 		}

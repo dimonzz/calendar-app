@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Search from './components/Search';
-import Calendar from './components/Calendar';
+import CalendarContainer from './containers/CalendarContainer';
+import SwitcherContainer from './containers/SwitcherContainer';
 
 class App extends Component {
   render() {
@@ -11,7 +12,10 @@ class App extends Component {
         <Header>
           <Search></Search>
         </Header>
-        <Calendar></Calendar>
+        <div>
+          <SwitcherContainer></SwitcherContainer>
+          <CalendarContainer></CalendarContainer>
+        </div>
       </div>
     );
   }

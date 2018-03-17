@@ -11,7 +11,10 @@ import App from './App';
 
 import registerServiceWorker from './registerServiceWorker';
 
-let store = createStore(reducers);
+let store = createStore(reducers, {
+	date: new Date()
+});
+console.log(store.getState())
 
 ReactDOM.render(
     <Provider store={store}>

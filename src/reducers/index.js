@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-const eventsReducers = (state = [], action) => {
+const events = (state = [], action) => {
   switch (action.type) {
     case 'ADD_EVENT':
       return [
@@ -34,19 +34,16 @@ const eventsReducers = (state = [], action) => {
   }
 }
 
-const calendarReducers = (state = {}, action) => {
+const date = (state = Date(), action) => {
   switch (action.type) {
     case 'CHANGE_DATE':
-      return {
-        date: action.date,
-        month: action.month
-      }
+      return action.date;
     default:
       return state;
   }
 }
  
 export default combineReducers({
-  eventsReducers,
-  calendarReducers
+  events,
+  date
 })

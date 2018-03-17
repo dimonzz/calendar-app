@@ -20,9 +20,8 @@ export const deleteEvent = id => ({
   id
 })
  
-export const changeDate = (month, year) => ({
+export const changeDate = (date) => ({
   type: 'CHANGE_DATE',
-  month,
-  year
+  date
 })
  
