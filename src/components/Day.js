@@ -2,7 +2,9 @@ import React from 'react'
  
 const Day = ({ fromCurrentMonth, day, events }) => (
   <div className={ `day ${!fromCurrentMonth ? 'fromOtherMonth' : ''}` }>
-  	{ day }
+  	<div className="dayNumber">
+  		<div className="number">{ day }</div>
+  	</div>
   </div>
 )
 

@@ -9,9 +9,46 @@ body {
 }
 .day{
   width: 14.285%;
-  text-align: center;
-  border: 1px solid;
+  border-width: 1px 0 0 1px;
+  border: 1px solid #e5e5e5;
+  min-height: 100px;
+  cursor: pointer;
 }
-.day.fromOtherMonth{
-  background: grey;
+.day .dayNumber{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+.day .dayNumber .number{
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+}
+
+.day.fromOtherMonth .dayNumber{
+  color: #e5e5e5;
+}
+
+.day:hover .dayNumber .number{
+  color: white;
+  background: #007bff;
+  border-radius: 100%;
+}
+
+.btn-group{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.daysNames{
+	width: 100%;
+	display: flex;
+}
+
+.daysNames > div {
+	width: 14.285%;
+	text-align: center;
+	color: white;
+	line-height: 30px;
 }

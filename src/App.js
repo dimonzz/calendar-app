@@ -12,7 +12,7 @@ class App extends Component {
         <Header>
           <Search></Search>
         </Header>
-        <div>
+        <div className="container">
           <SwitcherContainer></SwitcherContainer>
           <CalendarContainer></CalendarContainer>
         </div>

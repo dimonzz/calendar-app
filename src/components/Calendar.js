@@ -32,7 +32,24 @@ class Calendar extends React.Component {
 				shouldBeVisible = false;
 			}
 		}
-		return <div className="calendar">{ elements }</div>;
+
+		const weekdayNames = [
+			'Понеділок',
+			'Вівторок',
+			'Середа',
+			'Четвер',
+			'П\ятниця',
+			'Субота',
+			'Неділя'
+		];
+
+
+		return <div className="calendar">
+				<div className="daysNames">
+					{ weekdayNames.map((weekday) => <div className="bg-primary">{ weekday }</div>) }
+				</div>
+				{ elements }
+			   </div>;
 	}
 }
 
