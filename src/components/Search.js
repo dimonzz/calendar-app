@@ -59,7 +59,7 @@ class Search extends React.Component{
 	}
 
 	render() {
-		return <form className="form-inline my-2 my-lg-0 searchForm">
+		return <form className="form-inline searchForm">
 			  <input className="form-control " type="search" placeholder="Пошук" aria-label="Пошук" 
 			  	value={ this.state.filterValue } 
 			  	onChange={ this.handleChange }

@@ -33,15 +33,18 @@ body {
   background: #007bff;
   border-radius: 100%;
 }
-.daysNames{
+.daysNames, .shortDaysNames{
 	width: 100%;
 	display: flex;
 }
-.daysNames > div {
+.daysNames > div, .shortDaysNames > div {
 	width: 14.285%;
 	text-align: center;
 	color: white;
 	line-height: 30px;
+}
+.shortDaysNames {
+  display: none;
 }
 .event{
   width: 90%;
@@ -74,9 +77,48 @@ body {
   top: 40px;
   width: 100%;
   background: white;
+  z-index: 10000000;
 }
 .searchResults > div{
   border: 1px solid #e5e5e5;
   padding: 4px;
   cursor: pointer;
+}
+.navbar-brand{
+  color: #fff !important;
+}
+.eventTitle{
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+@media (max-width: 1024px){
+  .removeEventBtn{
+    width: 100%;
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  .eventTitle{
+    font-size: 10px;
+  }
+  .switcher{
+    flex-direction: column;
+    margin-bottom: 0px;
+  }
+  .switcher > div {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .switcher .dateButton{
+    width: 100%;
+  }
+  .shortDaysNames{
+    display: flex;
+  }
+  .daysNames{
+    display: none;
+  }
+  .searchForm{
+    width: 100%;
+  }
 }

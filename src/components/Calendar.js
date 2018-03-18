@@ -49,6 +49,16 @@ class Calendar extends React.Component {
 			}
 		}
 
+		const shortDayNames = [
+			'пн',
+			'вт',
+			'ср',
+			'чт',
+			'пт',
+			'сб',
+			'нд'
+		]
+
 		const weekdayNames = [
 			'Понеділок',
 			'Вівторок',
@@ -63,6 +73,9 @@ class Calendar extends React.Component {
 		return <div className="calendar">
 				<div className="daysNames">
 					{ weekdayNames.map((weekday, index) => <div key={index} className="bg-primary">{ weekday }</div>) }
+				</div>
+				<div className="shortDaysNames">
+					{ shortDayNames.map((weekday, index) => <div key={index} className="bg-primary">{ weekday }</div>) }
 				</div>
 				{ elements }
 			   </div>;

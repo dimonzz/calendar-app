@@ -19,7 +19,7 @@ class Day extends React.Component {
 			  		<div className="number">{ this.props.day }</div>
 			  		{ this.props.events.map((event) => {
 			  			return <a key={ event.id } className="event badge badge-info" onClick={ this.onEventClick.bind(this, event) }>
-			  						{ event.title }
+			  						<span className="eventTitle">{ event.title }</span>
 			  						<span className="removeEventBtn" onClick={ this.onEventDelete.bind(this, event) }>x</span>
 			  					</a>
 			  		})}
