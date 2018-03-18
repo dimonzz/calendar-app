@@ -1,5 +1,5 @@
 import React from 'react'
- 
+import { Text } from 'react-internationalization'
 
 class EventModal extends React.Component {
 
@@ -21,7 +21,7 @@ class EventModal extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		this.setState({
-			event: nextProps.event ? nextProps.event : this.getBlankEvent()
+			event: nextProps.event && nextProps.event.title ? nextProps.event : this.getBlankEvent()
 		})
 	}
 
@@ -75,23 +75,23 @@ class EventModal extends React.Component {
 		        </button>
 		      </div>
 		      <div className="modal-body">
-		      	{ this.state.showError ? <div className="alert alert-danger"><strong>Помилка!</strong> Потрібно заповнити усі поля.</div> : '' }
+		      	{ this.state.showError ? <div className="alert alert-danger"><strong><Text id="modal.error"></Text></strong><Text id="modal.errorText"></Text></div> : '' }
 		        <div className="form-group">
-		          <label htmlFor="title" className="col-form-label">Назва:</label>
+		          <label htmlFor="title" className="col-form-label"><Text id="modal.titleLabel"></Text>:</label>
 		          <input type="text" className="form-control" id="title" name="title" value={this.state.event.title} onChange={ this.handleChange } />
 		        </div>
 		        <div className="form-group">
-		          <label htmlFor="participants" className="col-form-label">Список учасників:</label>
+		          <label htmlFor="participants" className="col-form-label"><Text id="modal.participantsLabel"></Text>:</label>
 		          <input type="text" className="form-control" id="participants" name="participants" value={this.state.event.participants} onChange={ this.handleChange } />
 		        </div>
 		        <div className="form-group">
-		          <label htmlFor="description" className="col-form-label">Опис:</label>
+		          <label htmlFor="description" className="col-form-label"><Text id="modal.descriptionLabel"></Text>:</label>
 		          <input type="text" className="form-control" id="description" name="description" value={this.state.event.description} onChange={ this.handleChange } />
 		        </div>
 		      </div>
 		      <div className="modal-footer">
-		        <button type="button" className="btn btn-primary" onClick={ this.handleSubmit }>Зберегти</button>
-		        <button type="button" className="btn btn-secondary" onClick={ this.props.hideModal }>Закрити</button>
+		        <button type="button" className="btn btn-primary" onClick={ this.handleSubmit }><Text id="modal.save"></Text></button>
+		        <button type="button" className="btn btn-secondary" onClick={ this.props.hideModal }><Text id="modal.close"></Text></button>
 		      </div>
 		    </div>
 		  </div>

@@ -1,4 +1,8 @@
 import React from 'react'
+import {
+  translate,
+  internationalize
+} from 'react-internationalization'
  
 class Search extends React.Component{
 
@@ -38,7 +42,7 @@ class Search extends React.Component{
 	filterEventsList(eventsList, filterValue) {
 		if(filterValue.length < 3) return [];
 		return eventsList.filter((event) => {
-			return event.title.toLowerCase().includes(filterValue);
+			return event.title.toLowerCase().includes(filterValue.toLowerCase());
 		});
 	}
 
@@ -60,17 +64,17 @@ class Search extends React.Component{
 
 	render() {
 		return <form className="form-inline searchForm">
-			  <input className="form-control " type="search" placeholder="Пошук" aria-label="Пошук" 
+			  <input className="form-control " type="search" placeholder={ `${translate('global.search_label')}` }
 			  	value={ this.state.filterValue } 
 			  	onChange={ this.handleChange }
 			  	onFocus={ this.onFocus } 
         		onBlur={ this.onBlur }  />
 			  <div className="searchResults">
-			  	{ this.state.filteredEvents.map((event) => <div key={ event.id } onMouseDown ={ () => { this.handleEventClick(event) } }>{ `${event.title}(${event.dateString})` }</div>) }
+			  	{ this.state.filteredEvents.map((event) => <div key={ event.id } onMouseDown ={ () => { this.handleEventClick(event) } }>{ `${event.title} (${event.dateString})` }</div>) }
 			  </div>
 		  </form>
 	}
 }
 
-export default Search
+export default internationalize(Search)
 

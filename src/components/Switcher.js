@@ -1,4 +1,5 @@
 import React from 'react'
+import { Text } from 'react-internationalization'
  
 class Switcher extends React.Component {
 
@@ -18,17 +19,17 @@ class Switcher extends React.Component {
 
     render() {
         const date = this.props.date;
-        
+
         return (
           <div className="switcher">
             <div className="btn-group" role="group">
               <div className="btn btn-primary switcherButton" onClick={ this.monthIncreased }>&lt;</div>
-              <div className="btn btn-primary dateButton">{ date.toLocaleString("uk-ua", { month: "long" }) } { date.getFullYear() }</div>
+              <div className="btn btn-primary dateButton"><Text id={`monthes.m_${date.getMonth()}`}></Text> { date.getFullYear() }</div>
               <div className="btn btn-primary switcherButton" onClick={ this.monthDecreased }>&gt;</div>
             </div>
             <div className="btn btn-primary todayBtn" onClick={() => {
               this.props.changeDate(new Date())
-            }}>Сьогодні</div>
+            }}><Text id="global.today"></Text></div>
           </div>
         )
     }

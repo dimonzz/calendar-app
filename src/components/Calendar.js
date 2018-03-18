@@ -1,5 +1,9 @@
 import React from 'react'
-import Day from './Day.js';
+import Day from './Day.js'
+import {
+  translate,
+  internationalize
+} from 'react-internationalization'
  
 class Calendar extends React.Component {
 
@@ -49,39 +53,29 @@ class Calendar extends React.Component {
 			}
 		}
 
-		const shortDayNames = [
-			'пн',
-			'вт',
-			'ср',
-			'чт',
-			'пт',
-			'сб',
-			'нд'
-		]
-
 		const weekdayNames = [
-			'Понеділок',
-			'Вівторок',
-			'Середа',
-			'Четвер',
-			'П\'ятниця',
-			'Субота',
-			'Неділя'
+			'monday',
+			'tuesday',
+			'wednesday',
+			'thursday',
+			'friday',
+			'saturday',
+			'sunday'
 		];
 
 
 		return <div className="calendar">
 				<div className="daysNames">
-					{ weekdayNames.map((weekday, index) => <div key={index} className="bg-primary">{ weekday }</div>) }
+					{ weekdayNames.map((weekday, index) => <div key={index} className="bg-primary">{ translate(`weekdays.${weekday}`) }</div>) }
 				</div>
 				<div className="shortDaysNames">
-					{ shortDayNames.map((weekday, index) => <div key={index} className="bg-primary">{ weekday }</div>) }
+					{ weekdayNames.map((weekday, index) => <div key={index} className="bg-primary">{ translate(`shortWeekdays.${weekday}`) }</div>) }
 				</div>
 				{ elements }
 			   </div>;
 	}
 }
 
-export default Calendar
+export default internationalize(Calendar)
 
 

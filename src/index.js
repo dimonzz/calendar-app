@@ -7,6 +7,10 @@ import './index.css';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import reducers from './reducers'
+
+import { InternationalizationProvider } from 'react-internationalization'
+import * as languages from './translations'
+
 import App from './App';
 
 let events = JSON.parse(localStorage.getItem("events"));
@@ -31,6 +35,8 @@ store.subscribe(() => {
 })
 
 ReactDOM.render(
-    <Provider store={store}>
+  <Provider store={store}>
+    <InternationalizationProvider defaultLanguage="ua" languages={languages}>
       <App />
-    </Provider>, document.getElementById('root'));
+    </InternationalizationProvider>
+  </Provider>, document.getElementById('root'));
