@@ -20,7 +20,10 @@ const extractEventFromAction = (action) => {
 const events = (state = [], action) => {
   // JS saves references to nested objects so we need to create deep copy
   let stateCopy = JSON.parse(JSON.stringify(state));
-  const currentDay = getCurrentDayFromState(stateCopy, action);
+  let currentDay = [];
+  if (action.type === 'UPDATE_EVENT' || action.type === 'DELETE_EVENT') {
+    currentDay = getCurrentDayFromState(stateCopy, action);
+  }
 
   switch (action.type) {
     case 'ADD_EVENT':

@@ -19,54 +19,64 @@ body {
 	flex-direction: column;
 	align-items: flex-end;
 }
-
 .day .dayNumber .number{
 	width: 30px;
 	height: 30px;
 	text-align: center;
 	line-height: 30px;
 }
-
 .day.fromOtherMonth .dayNumber{
   color: #e5e5e5;
 }
-
 .day:hover .dayNumber .number{
   color: white;
   background: #007bff;
   border-radius: 100%;
 }
-
-.btn-group{
-	margin-top: 20px;
-	margin-bottom: 20px;
-}
 .daysNames{
 	width: 100%;
 	display: flex;
 }
-
 .daysNames > div {
 	width: 14.285%;
 	text-align: center;
 	color: white;
 	line-height: 30px;
 }
-
 .event{
   width: 90%;
   margin: 0 auto;
   margin-top: 2px;
 }
-
 .removeEventBtn{
   float: right;
 }
-
 .modal{
   background: rgb(229, 229, 229, 0.8);
 }
-
 .modal.show{
 	display: block;
+}
+.switcher{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.dateButton{
+  min-width: 140px;
+}
+.searchForm{
+  position: relative;
+}
+.searchResults{
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  background: white;
+}
+.searchResults > div{
+  border: 1px solid #e5e5e5;
+  padding: 4px;
+  cursor: pointer;
 }
