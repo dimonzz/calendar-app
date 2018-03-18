@@ -52,3 +52,21 @@ body {
 	color: white;
 	line-height: 30px;
 }
+
+.event{
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 2px;
+}
+
+.removeEventBtn{
+  float: right;
+}
+
+.modal{
+  background: rgb(229, 229, 229, 0.8);
+}
+
+.modal.show{
+	display: block;
+}

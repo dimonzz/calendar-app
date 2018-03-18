@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
-import { addEvent, updateEvent, deleteEvent } from '../actions'
+import { showModal, deleteEvent } from '../actions'
 import Calendar from '../components/Calendar'
  
 const getMonthEvents = (events, date) => {
-  if (!events[date.getYear()] || !events[date.getYear()][date.getMonth()]) {
+  if (!events[date.getFullYear()] || !events[date.getFullYear()][date.getMonth() + 1]) {
     return [];
   }
-  return events[date.getYear()][date.getMonth()];
+  return events[date.getFullYear()][date.getMonth() + 1];
 }
  
 const mapStateToProps = state => ({
@@ -15,9 +15,8 @@ const mapStateToProps = state => ({
 });
  
 const mapDispatchToProps = dispatch => ({
-  addEvent: (date, title, participants, description) => dispatch(addEvent(date, title, participants, description)),
-  updateEvent: (id, title, participants, description) => dispatch(updateEvent(id, title, participants, description)),
-  deleteEvent: (id) => dispatch(deleteEvent(id)),
+  showModal: (event, dateString) => dispatch(showModal(event, dateString)),
+  deleteEvent: (id, dateString) => dispatch(deleteEvent(id, dateString)),
 })
  
 export default connect(

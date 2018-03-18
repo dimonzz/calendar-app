@@ -12,7 +12,25 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 let store = createStore(reducers, {
-	date: new Date()
+	date: new Date(),
+	events: {
+		2018: {
+			3: {
+				18: [
+						{
+							id: 1,
+							dateString: '18/3/2018',
+							title: 'Event 1'
+						},
+						{
+							id: 2,
+							dateString: '18/3/2018',
+							title: 'Event 2'
+						}
+					]
+				}
+			}
+		}
 });
 console.log(store.getState())
 
