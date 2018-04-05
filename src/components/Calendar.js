@@ -1,78 +1,78 @@
 import React from 'react'
-import Day from './Day.js'
 import {
   translate,
   internationalize
 } from 'react-internationalization'
+
+import Day from './Day'
+
+
+const weekdayNames = [
+	'monday',
+	'tuesday',
+	'wednesday',
+	'thursday',
+	'friday',
+	'saturday',
+	'sunday'
+]
  
 class Calendar extends React.Component {
+	static defaultProps = {
+		events: {}
+	}
 
 	render() {
-		const date = new Date(this.props.date);
-		date.setDate(1);
+		const date = new Date(this.props.date)
+		date.setDate(1)
 		
-		const currentMonth = date.getMonth();
-		const currentYear = date.getYear();
+		const currentMonth = date.getMonth()
+		const currentYear = date.getFullYear()
 
 		// as JS return 0 for Sunday, we need to make little hack around it 
-		let dayInWeek = date.getDay();
-		dayInWeek = dayInWeek === 0 ? 7 : dayInWeek;
+		const dayInWeek = date.getDay() || 7
 
 		if (dayInWeek !== 1) {
 			date.setDate(2 - dayInWeek)
 		}
 
-		const elements = [];
-		let shouldBeVisible = true;
-		while (shouldBeVisible) {
-			const fromCurrentMonth = date.getMonth() === currentMonth;
-			const dayInMonth = date.getDate();
-			const dayEvents = this.props.events[dayInMonth] && fromCurrentMonth ? this.props.events[dayInMonth] : [];
-			elements.push(<Day 
-				key={date.getMonth() + '-' + date.getDate()} 
-				fromCurrentMonth={fromCurrentMonth} 
-				day={dayInMonth} 
-				events={dayEvents}
-				onEventDelete={this.props.deleteEvent}
-				onEventClick={(eventToEdit) => {
-					this.props.showModal(eventToEdit, '');
-				}}
-				onClick={ () => {
-					if (!fromCurrentMonth) return;
-					const dateString = `${dayInMonth}/${currentMonth + 1}/${date.getFullYear()}`;
-					this.props.showModal({}, dateString);
-				}}
-				></Day>);
+		const elements = []
+		for (let i = 0; i < 42; i++) {
+			const dayInMonth = date.getDate()
 
-			date.setDate(dayInMonth + 1);
-
-			// check if we are in next month and next day to render is Monday
-			// if yes - we don't need to add more days to calendar
-			if((date.getMonth() > currentMonth || date.getYear() > currentYear) && date.getDay() === 1) {
-				shouldBeVisible = false;
-			}
+			elements.push(
+				<Day
+					key={i}
+					day={dayInMonth}
+					onClick={this.props.showModal}
+					onEventDelete={this.props.deleteEvent}
+					events={this.props.events[dayInMonth]}
+					fromCurrentMonth={date.getMonth() === currentMonth}
+					dateString={`${dayInMonth}/${currentMonth + 1}/${currentYear}`}
+				/>
+			)
+			date.setDate(dayInMonth + 1)
 		}
 
-		const weekdayNames = [
-			'monday',
-			'tuesday',
-			'wednesday',
-			'thursday',
-			'friday',
-			'saturday',
-			'sunday'
-		];
-
-
-		return <div className="calendar">
+		return (
+			<div className="calendar">
 				<div className="daysNames">
-					{ weekdayNames.map((weekday, index) => <div key={index} className="bg-primary">{ translate(`weekdays.${weekday}`) }</div>) }
+					{weekdayNames.map((weekday, index) => (
+						<div key={index} className="bg-primary">
+							{translate(`weekdays.${weekday}`)}
+						</div>
+					))}
 				</div>
 				<div className="shortDaysNames">
-					{ weekdayNames.map((weekday, index) => <div key={index} className="bg-primary">{ translate(`shortWeekdays.${weekday}`) }</div>) }
+					{weekdayNames.map((weekday, index) => (
+						<div key={index} className="bg-primary">
+							{translate(`shortWeekdays.${weekday}`)}
+						</div>
+					))}
 				</div>
-				{ elements }
-			   </div>;
+				{elements}
+			</div>
+		)
 	}
 }
 

@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import './App.css';
-import Header from './components/Header';
-import SearchContainer from './containers/SearchContainer';
-import CalendarContainer from './containers/CalendarContainer';
-import SwitcherContainer from './containers/SwitcherContainer';
-import EventModalContainer from './containers/EventModalContainer';
+import React, { Component } from 'react'
+import './App.css'
+import Header from './components/Header'
+import SearchContainer from './containers/SearchContainer'
+import CalendarContainer from './containers/CalendarContainer'
+import SwitcherContainer from './containers/SwitcherContainer'
+import EventModalContainer from './containers/EventModalContainer'
 
 class App extends Component {
   render() {
@@ -19,8 +19,8 @@ class App extends Component {
         </div>
         <EventModalContainer></EventModalContainer>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

@@ -1,36 +1,29 @@
-export const addEvent = (title, participants, description, dateString) => ({
+export const addEvent = event => ({
   type: 'ADD_EVENT',
-  id: new Date().getTime(),
-  dateString,
-  title,
-  participants,
-  description
+  event : {
+    ...event,
+    id: new Date().getTime().toString()
+  }
 })
 
-export const updateEvent = (id, title, participants, description, dateString) => ({
+export const updateEvent = event => ({
   type: 'UPDATE_EVENT',
-  id,
-  title,
-  participants,
-  description,
-  dateString
+  event
 })
  
-export const deleteEvent = (id, dateString) => ({
+export const deleteEvent = event => ({
   type: 'DELETE_EVENT',
-  id,
-  dateString
+  event
 })
  
-export const changeDate = (date) => ({
+export const changeDate = date => ({
   type: 'CHANGE_DATE',
   date
 })
 
-export const showModal = (event, dateString) => ({
+export const showModal = event => ({
   type: 'SHOW_MODAL',
-  event,
-  dateString
+  event
 })
 
 export const hideModal = () => ({

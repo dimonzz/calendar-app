@@ -4,11 +4,11 @@ import Switcher from '../components/Switcher'
  
 const mapStateToProps = state => ({
   date: state.date
-});
- 
-const mapDispatchToProps = dispatch => ({
-  changeDate: (date) => dispatch(changeDate(date))
 })
+ 
+const mapDispatchToProps = {
+  changeDate
+}
  
 export default connect(
   mapStateToProps,

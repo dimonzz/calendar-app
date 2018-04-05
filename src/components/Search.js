@@ -7,72 +7,89 @@ import {
 class Search extends React.Component{
 
 	constructor(props) {
-		super(props);
+		super(props)
 		this.state = {
 			filterValue: '',
 			filteredEvents: []
-		};
-		this.eventsList = this.createEventsList(props.events);
+		}
+		this.eventsList = this.createEventsList(props.events)
 	}
 
 	componentWillReceiveProps(nextProps) {
-		this.eventsList = this.createEventsList(nextProps.events);
+		if (nextProps.events !== this.props.events)
+			this.eventsList = this.createEventsList(nextProps.events)
 	}
 
 	createEventsList(eventsStruct) {
-		let eventsList = [];
+		let eventsList = []
 		for (let year in eventsStruct) {
 			for (let month in eventsStruct[year]) {
 				for (let day in eventsStruct[year][month]) {
-					eventsList = eventsList.concat(eventsStruct[year][month][day])
+					eventsList = [
+						...eventsList,
+						...Object.keys(eventsStruct[year][month][day]).map(key => eventsStruct[year][month][day][key])
+					]
 				}
 			}
 		}
 
-		return eventsList;
+		return eventsList
 	}
 
-	handleChange = (e) => {	
+	handleChange = (e) => {
 		this.setState({
 			filterValue: e.target.value,
 			filteredEvents: this.filterEventsList(this.eventsList, e.target.value)
-		});
+		})
 	}
 
 	filterEventsList(eventsList, filterValue) {
-		if(filterValue.length < 3) return [];
-		return eventsList.filter((event) => {
-			return event.title.toLowerCase().includes(filterValue.toLowerCase());
-		});
+		if (filterValue.length < 3) return []
+		return eventsList.filter(event => event.fields.title.toLowerCase().indexOf(filterValue.toLowerCase()) !== -1)
 	}
 
 	onFocus = (e) => {
 		this.setState({
 			filteredEvents: this.filterEventsList(this.eventsList, this.state.filterValue)
-		});
+		})
 	}
 
 	onBlur = (e) => {
 		this.setState({
 			filteredEvents: []
-		});
+		})
 	}
 
 	handleEventClick = (eventClicked, e) => {
-		this.props.showModal(eventClicked);
+		this.props.showModal(eventClicked)
 	}
 
 	render() {
-		return <form className="form-inline searchForm">
-			  <input className="form-control " type="search" placeholder={ `${translate('global.search_label')}` }
-			  	value={ this.state.filterValue } 
-			  	onChange={ this.handleChange }
-			  	onFocus={ this.onFocus } 
-        		onBlur={ this.onBlur }  />
-			  <div className="searchResults">
-			  	{ this.state.filteredEvents.map((event) => <div key={ event.id } onMouseDown ={ () => { this.handleEventClick(event) } }>{ `${event.title} (${event.dateString})` }</div>) }
-			  </div>
-		  </form>
+		const { filterValue, filteredEvents } = this.state
+
+		return (
+			<div className="form-inline searchForm">
+				<input
+					type="search"
+					value={filterValue}
+					onBlur={this.onBlur}
+					onFocus={this.onFocus}
+					className="form-control"
+					onChange={this.handleChange}
+					placeholder={`${translate('global.search_label')}`}
+				/>
+				<div className="searchResults">
+					{filteredEvents.map((event) => (
+						<div
+							key={event.id}
+							onMouseDown ={() => this.handleEventClick(event)}
+						>
+							{`${event.fields.title} (${event.dateString})`}
+						</div>
+					))}
+				</div>
+			</div>
+		)
 	}
 }
 
