@@ -4,22 +4,22 @@ import { Text } from 'react-internationalization'
 class Switcher extends React.Component {
 
     monthDecreased = () => {
-        this.changeDate(1);
+        this.changeDate(1)
     }
 
     monthIncreased = () => {
-        this.changeDate(-1);
+        this.changeDate(-1)
     }
 
     changeDate(changeVal) {
-      const dateCopy = new Date(this.props.date);
+      const dateCopy = new Date(this.props.date)
 
       dateCopy.setMonth(dateCopy.getMonth() + changeVal)
-      this.props.changeDate(dateCopy);
+      this.props.changeDate(dateCopy)
     }
 
     render() {
-        const { date, changeDate } = this.props;
+        const { date, changeDate } = this.props
 
         return (
           <div className="switcher">

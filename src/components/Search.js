@@ -76,7 +76,7 @@ class Search extends React.Component{
 					onFocus={this.onFocus}
 					className="form-control"
 					onChange={this.handleChange}
-					placeholder={`${translate('global.search_label')}`}
+					placeholder={translate('global.search_label')}
 				/>
 				<div className="searchResults">
 					{filteredEvents.map((event) => (

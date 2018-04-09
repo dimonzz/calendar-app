@@ -14,33 +14,24 @@ import * as languages from './translations'
 import App from './App'
 
 const events = JSON.parse(localStorage.getItem("events")) || {}
-const store = createStore(
-	reducers,
-	{
-		date: new Date(),
-		events: events
-	},
-	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
+const store = createStore( reducers, { events }, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
-const prevStoreSnapshot = {
-	date: 0,
-	showModal: false
-}
+let prevEvents = events;
 
 store.subscribe(() => {
-	const newState = store.getState();
-	if (newState.date.getTime() === prevStoreSnapshot.date && prevStoreSnapshot.showModal === newState.modal.show) {
+	const newState = store.getState()
+	if (newState.events !== prevEvents) {
+		prevEvents = newState.events
 		localStorage.setItem("events", JSON.stringify(newState.events))
-	} else {
-		prevStoreSnapshot.date = newState.date.getTime()
-		prevStoreSnapshot.showModal = newState.modal.show
 	}
 })
 
 ReactDOM.render(
   <Provider store={store}>
-    <InternationalizationProvider defaultLanguage="ua" languages={languages}>
+    <InternationalizationProvider
+			defaultLanguage="ua"
+			languages={languages}
+		>
       <App />
     </InternationalizationProvider>
 	</Provider>

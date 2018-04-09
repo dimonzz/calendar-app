@@ -23,6 +23,7 @@ class Calendar extends React.Component {
 	}
 
 	render() {
+		const { showModal, deleteEvent, events } = this.props;
 		const date = new Date(this.props.date)
 		date.setDate(1)
 		
@@ -40,13 +41,15 @@ class Calendar extends React.Component {
 		for (let i = 0; i < 42; i++) {
 			const dayInMonth = date.getDate()
 
+			if (date.getMonth() > currentMonth && date.getDay() === 1) break;
+
 			elements.push(
 				<Day
 					key={i}
 					day={dayInMonth}
-					onClick={this.props.showModal}
-					onEventDelete={this.props.deleteEvent}
-					events={this.props.events[dayInMonth]}
+					onClick={showModal}
+					events={events[dayInMonth]}
+					onEventDelete={deleteEvent}
 					fromCurrentMonth={date.getMonth() === currentMonth}
 					dateString={`${dayInMonth}/${currentMonth + 1}/${currentYear}`}
 				/>
@@ -58,14 +61,20 @@ class Calendar extends React.Component {
 			<div className="calendar">
 				<div className="daysNames">
 					{weekdayNames.map((weekday, index) => (
-						<div key={index} className="bg-primary">
+						<div
+							key={index}
+							className="bg-primary"
+						>
 							{translate(`weekdays.${weekday}`)}
 						</div>
 					))}
 				</div>
 				<div className="shortDaysNames">
 					{weekdayNames.map((weekday, index) => (
-						<div key={index} className="bg-primary">
+						<div
+							key={index}
+							className="bg-primary"
+						>
 							{translate(`shortWeekdays.${weekday}`)}
 						</div>
 					))}

@@ -11,13 +11,13 @@ class App extends Component {
     return (
       <div>
         <Header>
-          <SearchContainer></SearchContainer>
+          <SearchContainer />
         </Header>
         <div className="container">
-          <SwitcherContainer></SwitcherContainer>
-          <CalendarContainer></CalendarContainer>
+          <SwitcherContainer />
+          <CalendarContainer />
         </div>
-        <EventModalContainer></EventModalContainer>
+        <EventModalContainer />
       </div>
     )
   }

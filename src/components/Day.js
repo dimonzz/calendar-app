@@ -6,18 +6,20 @@ class Day extends React.Component {
 		events: {}
 	}
 
-	onEventClick = (eventToEdit, clickEvent) => {
+	onClick = (eventToEdit, clickEvent, propFunc) => {
 		clickEvent.stopPropagation()
-		this.props.onClick(eventToEdit)
-	}
-
-	onEventDelete = (eventToDelete, clickEvent) => {
-		clickEvent.stopPropagation()
-		this.props.onEventDelete(eventToDelete)
+		propFunc(eventToEdit)
 	}
 
 	render() {
-		const { day, events, fromCurrentMonth, onClick, dateString } = this.props
+		const {
+			day,
+			events,
+			onClick,
+			dateString,
+			onEventDelete,
+			fromCurrentMonth
+		} = this.props
 
 		return (
 			<div
@@ -32,14 +34,14 @@ class Day extends React.Component {
 						<a
 							key={events[key].id}
 							className="event badge badge-info"
-							onClick={this.onEventClick.bind(this, events[key])}
+							onClick={e => this.onClick(events[key], e, onClick)}
 						>
 							<span className="eventTitle">
 								{events[key].fields.title}
 							</span>
 							<span
 								className="removeEventBtn"
-								onClick={this.onEventDelete.bind(this, events[key])}
+								onClick={e => this.onClick(events[key], e, onEventDelete)}
 							>
 								x
 							</span>
