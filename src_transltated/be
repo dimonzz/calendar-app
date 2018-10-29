@@ -1,26 +1,124 @@
-import React, { Component } from 'react';
-import './App.css';
-import Header from './components/Header';
-import SearchContainer from './containers/SearchContainer';
-import CalendarContainer from './containers/CalendarContainer';
-import SwitcherContainer from './containers/SwitcherContainer';
-import EventModalContainer from './containers/EventModalContainer';
-
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <Header>
-          <SearchContainer></SearchContainer>
-        </Header>
-        <div className="container">
-          <SwitcherContainer></SwitcherContainer>
-          <CalendarContainer></CalendarContainer>
-        </div>
-        <EventModalContainer></EventModalContainer>
-      </div>
-    );
-  }
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.calendar{
+  display: flex;
+  flex-wrap: wrap;
+}
+.day{
+  width: 14.285%;
+  border-width: 1px 0 0 1px;
+  border: 1px solid #e5e5e5;
+  min-height: 100px;
+  cursor: pointer;
+}
+.day .dayNumber{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+.day .dayNumber .number{
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+}
+.day.fromOtherMonth .dayNumber{
+  color: #e5e5e5;
+}
+.day:hover .dayNumber .number{
+  color: white;
+  background: #007bff;
+  border-radius: 100%;
+}
+.daysNames, .shortDaysNames{
+	width: 100%;
+	display: flex;
+}
+.daysNames > div, .shortDaysNames > div {
+	width: 14.285%;
+	text-align: center;
+	color: white;
+	line-height: 30px;
+}
+.shortDaysNames {
+  display: none;
+}
+.event{
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 2px;
+}
+.removeEventBtn{
+  float: right;
+}
+.modal{
+  background: rgb(229, 229, 229, 0.8);
+}
+.modal.show{
+	display: block;
+}
+.switcher{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.dateButton{
+  min-width: 140px;
+}
+.searchForm{
+  position: relative;
+}
+.searchResults{
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  background: white;
+  z-index: 10000000;
+}
+.searchResults > div{
+  border: 1px solid #e5e5e5;
+  padding: 4px;
+  cursor: pointer;
+}
+.navbar-brand{
+  color: #fff !important;
+}
+.eventTitle{
+  word-wrap: break-word;
+  white-space: normal;
 }
 
-export default App;
+@media (max-width: 1024px){
+  .removeEventBtn{
+    width: 100%;
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  .eventTitle{
+    font-size: 10px;
+  }
+  .switcher{
+    flex-direction: column;
+    margin-bottom: 0px;
+  }
+  .switcher > div {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .switcher .dateButton{
+    width: 100%;
+  }
+  .shortDaysNames{
+    display: flex;
+  }
+  .daysNames{
+    display: none;
+  }
+  .searchForm{
+    width: 100%;
+  }
+}
